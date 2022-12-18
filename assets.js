@@ -2,13 +2,12 @@
 * @param {number} dx - Starting X position.
 * @param {number} dy - Starting Y position.
 * @param {string} title - Title content of dropdown. Max: 41 characters.
-* @param {string[]|string} text - Content inside of dropdown.
+* @param {string[]} text - Content inside of dropdown.
 * @param {string[]|string} type - Type of element inside of dropdown
 * @param {'up, down, left, right'} direction - Direction dropdown opens.
-* @param {'event'} [interaction] - Using on event listeners reciprocated. 
 * @param {'HTML element ID'} [parentElement] - Element for child elements.
   */
-function dropdown(dx, dy, title, text, type, direction, parentElement, interaction) {
+function dropdown(dx, dy, title, text, type, direction, parentElement) {
   //Defining variables. Used later.
   this.dx = dx;
   this.dy = dy;
@@ -17,22 +16,10 @@ function dropdown(dx, dy, title, text, type, direction, parentElement, interacti
   this.type = type;
   this.direction = direction;
   this.parentElement = parentElement;
-  this.interaction = interaction;
 
   let offX = title.length;
-  let eventNav = false;
+  let opened = false;
   //Checks if interaction is active.
-  if (interaction) {
-    document.addEventListener('${interaction}', e => {
-      if (e.returnValue) {
-        eventNav = true;
-      }
-      else {
-        console.error("Reciprocated value is unable to be used.");
-        eventNav = false;
-      }
-    });
-  }
   //Returning error if code is too long.
   if (offX > 41){
     console.error("String is longer than 41 characters. Reduce string to 41 characters or less.");
@@ -47,28 +34,53 @@ function dropdown(dx, dy, title, text, type, direction, parentElement, interacti
     parentElementsrc = document.querySelector('body');
   }
   //Element setup
-  let bodyElement = document.createElement(type);
   let titleElement = document.createElement("h1");
   titleElement.style.paddingRight = offX + "px";
   titleElement.style.display = "inline";
   titleElement.innerHTML = title;
-  bodyElement.innerHTML = text;
   parentElementsrc.appendChild(titleElement);
   //Directional setup
-  let dwnimg = document.createElement('img');
-  dwnimg.src = "https://cdn-icons-png.flaticon.com/512/25/25623.png";
-  dwnimg.style.width = "32pt";
-  dwnimg.style.height = "32pt";
+  let img = document.createElement('img');
+  img.style.width = "32pt";
+  img.style.height = "32pt";
   //Directional check
   if (direction == "down") {
-    parentElementsrc.appendChild(dwnimg);
+    img.src = "https://cdn-icons-png.flaticon.com/512/25/25623.png";
+    parentElementsrc.appendChild(img);
   }
   //Dropdown element(s)
-  let dropdownfill = parentElementsrc.appendChild(bodyElement);
-  dropdownfill.style.position = 'absolute';
-  dropdownfill.style.left = '2.5vmax';
-
+  let bodyElement;
+  let dropdownfill;
+  for (var i = 0; i < text.length; i++) {
+    bodyElement = document.createElement(type);
+    bodyElement.innerHTML = text[i];
+    dropdownfill.Array = [parentElementsrc.appendChild(bodyElement)]
+    dropdownfill[i].style.position = 'absolute';
+    dropdownfill[i].style.left = '2.5vmax';
+    dropdownfill[i].style.visibility = "hidden";
+    Array
+    }
+  img.addEventListener('click',function() {
+    if (opened){
+      dropdownfill.style.visibility = 'hidden';
+      opened = false;
+    }else{
+      dropdownfill.style.visibility = 'visible';
+      opened = true;
+    }
+  });
+  img.style.cursor = 'pointer';
+  titleElement.addEventListener('click',function() {
+    if (opened){
+      dropdownfill.style.visibility = 'hidden';
+      opened = false;
+    }else{
+      dropdownfill.style.visibility = 'visible';
+      opened = true;
+    }
+  });
+  titleElement.style.cursor = 'pointer';
 }
-
+var textList = ["Hi", "I", "Hui", "Hui", "Hui", "Hui", "Hui"];
 //Example function
-dropdown(200, 200, "Title Content", "Inner content", "p", "down", "container");
+dropdown(200, 200, "Title Content", textList, "p", "down", "container");
