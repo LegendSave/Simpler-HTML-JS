@@ -1,10 +1,10 @@
 /**
 * @param {number} dx - Starting X position.
 * @param {number} dy - Starting Y position.
-* @param {string} title - Title content of dropdown. Max: 41 characters.
-* @param {string[]} text - Content inside of dropdown.
-* @param {string[]|string} type - Type of element inside of dropdown
-* @param {'up, down, left, right'} direction - Direction dropdown opens.
+* @param {string} title - Title content of dropdown.
+* @param {string} text - Content inside of dropdown.
+* @param {string} type - Type of element inside of dropdown
+* @param {'down, left, right'} direction - Direction dropdown opens.
 * @param {'HTML element ID'} [parentElement] - Element for child elements.
   */
 function dropdown(dx, dy, title, text, type, direction, parentElement) {
@@ -17,7 +17,7 @@ function dropdown(dx, dy, title, text, type, direction, parentElement) {
   this.direction = direction;
   this.parentElement = parentElement;
 
-  let offX = title.length;
+  let offX = 10;
   let opened = false;
   //Checks if interaction is active.
   //Returning error if code is too long.
@@ -51,15 +51,11 @@ function dropdown(dx, dy, title, text, type, direction, parentElement) {
   //Dropdown element(s)
   let bodyElement;
   let dropdownfill;
-  for (var i = 0; i < text.length; i++) {
     bodyElement = document.createElement(type);
-    bodyElement.innerHTML = text[i];
-    dropdownfill.Array = [parentElementsrc.appendChild(bodyElement)]
-    dropdownfill[i].style.position = 'absolute';
-    dropdownfill[i].style.left = '2.5vmax';
-    dropdownfill[i].style.visibility = "hidden";
-    Array
-    }
+    bodyElement.innerHTML = text;
+    dropdownfill.style.position = 'absolute';
+    dropdownfill.style.left = '2.5vmax';
+    dropdownfill.style.visibility = "hidden";
   img.addEventListener('click',function() {
     if (opened){
       dropdownfill.style.visibility = 'hidden';
@@ -82,4 +78,5 @@ function dropdown(dx, dy, title, text, type, direction, parentElement) {
   titleElement.style.cursor = 'pointer';
 }
 //Example function
-dropdown(200, 200, "Title Content", "Hello, "p", "down", "container");
+dropdown(200, 200, "Title", "Inner text", "p", "down", "container");
+
