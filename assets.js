@@ -81,6 +81,5 @@ function dropdown(dx, dy, title, text, type, direction, parentElement) {
   });
   titleElement.style.cursor = 'pointer';
 }
-var textList = ["Hi", "I", "Hui", "Hui", "Hui", "Hui", "Hui"];
 //Example function
-dropdown(200, 200, "Title Content", textList, "p", "down", "container");
+dropdown(200, 200, "Title Content", "Hello, "p", "down", "container");
