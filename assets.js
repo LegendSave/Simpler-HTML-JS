@@ -20,11 +20,6 @@ function dropdown(dx, dy, title, text, type, direction, parentElement) {
   let offX = 10;
   let opened = false;
   //Checks if interaction is active.
-  //Returning error if code is too long.
-  if (offX > 41){
-    console.error("String is longer than 41 characters. Reduce string to 41 characters or less.");
-    return 0;
-  }
   //Checks if parentElement is active.
   var parentElementsrc;
   if (parentElement) {
@@ -49,34 +44,50 @@ function dropdown(dx, dy, title, text, type, direction, parentElement) {
     parentElementsrc.appendChild(img);
   }
   //Dropdown element(s)
-  let bodyElement;
-  let dropdownfill;
-    bodyElement = document.createElement(type);
-    bodyElement.innerHTML = text;
-    dropdownfill.style.position = 'absolute';
-    dropdownfill.style.left = '2.5vmax';
+  let dropdownfill = document.createElement(type);
+  parentElementsrc.appendChild(dropdownfill);
+    dropdownfill.style.position = 'relative';
     dropdownfill.style.visibility = "hidden";
-  img.addEventListener('click',function() {
+    switch (type) {
+      case 'a':
+        dropdownfill.href = text;
+        dropdownfill.innerHTML = text;
+        dropdownfill.style.top = '32pt';
+        dropdownfill.style.left = '-7vmax';
+        break;
+      case 'img':
+        dropdownfill.src = text;
+        dropdownfill.style.left = '2.5vmax';
+        break;
+      default:
+        dropdownfill.innerHTML = text;
+        dropdownfill.style.left = '2.5vmax';
+        break;
+    }
+  img.addEventListener('click', function() {
     if (opened){
       dropdownfill.style.visibility = 'hidden';
       opened = false;
+      img.src = "https://cdn-icons-png.flaticon.com/512/25/25623.png";
     }else{
       dropdownfill.style.visibility = 'visible';
       opened = true;
+      img.src = "https://cdn-icons-png.flaticon.com/512/75/75519.png";
     }
   });
   img.style.cursor = 'pointer';
+  img.id = 'interactionIcon';
+  img.className = 'interactionIcon';
   titleElement.addEventListener('click',function() {
     if (opened){
       dropdownfill.style.visibility = 'hidden';
       opened = false;
+      img.src = "https://cdn-icons-png.flaticon.com/512/25/25623.png";
     }else{
       dropdownfill.style.visibility = 'visible';
       opened = true;
+      img.src = "https://cdn-icons-png.flaticon.com/512/75/75519.png";
     }
   });
   titleElement.style.cursor = 'pointer';
 }
-//Example function
-dropdown(200, 200, "Title", "Inner text", "p", "down", "container");
-
